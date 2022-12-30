@@ -15,7 +15,7 @@ var BuiltinStatements = []Block{
 func loopblock(block *Block, instance *Instance) {
 	content, _ := block.GetContentAt(0)
 
-	if strings.HasPrefix(block.Value, "loop") {
+	if strings.HasPrefix(block.Value, "loop") && !strings.HasSuffix(block.Value, "times do") {
 		loopIndex := 0
 	Loop:
 		for {

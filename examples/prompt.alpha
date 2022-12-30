@@ -1,0 +1,3 @@
+name = null
+prompt "&eWhat's your name?" stored in {name}
+sendln "&eHello, {name}"

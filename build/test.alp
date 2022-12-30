@@ -1,0 +1,3 @@
+loop 5 times do
+    sendln "Hola"
+end

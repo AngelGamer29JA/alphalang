@@ -146,7 +146,7 @@ func (p *Parser) CheckLine(line string, idx int) error {
 	if !IsVariableDefinition(line) && !CheckExpression(line) {
 		if !strings.HasSuffix(line, BlockStartPrefix) {
 			//p.AddError(fmt.Sprintf("invalid expression syntax %s", line), i) // Expression
-			return fmt.Errorf("invalid expression syntax %s", line)
+			return fmt.Errorf("\tinvalid expression syntax %s", line)
 		} else if strings.HasSuffix(line, BlockStartPrefix) {
 			if !CheckStatement(line) {
 				return fmt.Errorf("invalid statement header %s", line)
@@ -202,57 +202,11 @@ func (p *Parser) AnalyzeStatement(start int) { // function: Analyze Statement
 	}
 }
 
-/*func (p *Parser) AnalyzeStatement(start int) { // function: AnalyzeStatement
-	//subList := p.Data[i:]
-	maxLines := len(p.Data) - 1
-
-	// Recorre todas las líneas de código desde la línea de inicio del bloque hasta la última línea de código
-	for i := start + 1; i <= maxLines; i++ {
-		// Verifica si existe una palabra clave "end" en la línea actual
-		if strings.TrimSpace(p.Data[i]) == "end" {
-			// Si se encuentra una palabra clave "end", finaliza la función
-			return
-		}
-	}
-
-	// Si no se encuentra una palabra clave "end", muestra un mensaje de error
-	startLine := p.Data[start]
-	endLine := strings.TrimSpace(p.Data[maxLines])
-	if endLine == "" {
-		endLine = "eof"
-	}
-	closureMessage := fmt.Sprintf("invalid statement closure\n\n\t&6%d >> &r%s\n\t...\n\t&6%d >> &rexpected 'end' but '%s'", start, startLine, maxLines, endLine)
-	p.AddError(closureMessage, maxLines+1)
-
-	// subLine := start + 1
-
-	// for strings.TrimSpace(p.Data[subLine]) != "end" {
-	// 	if subLine == maxLines {
-	// 		if strings.TrimSpace(p.Data[subLine]) != "end" {
-	// 			startLine := p.Data[start]
-	// 			endLine := strings.TrimSpace(p.Data[subLine])
-	// 			if endLine == "" {
-	// 				endLine = "eof"
-	// 			}
-	// 			closureMessage := fmt.Sprintf("invalid statement closure\n\n\t&6%d >> &r%s\n\t...\n\t&6%d >> &rexpected 'end' but '%s'", start, startLine, subLine, endLine)
-	// 			p.AddError(closureMessage, subLine+1)
-	// 			break
-	// 		}
-	// 	}
-
-	// 	subLine += 1
-	// }
-}*/
-
 /*
-
-	Esta funcion se encarga de convertir los datos de la funcion
-	Analyze() a algo similar a un arbol de sintaxis para manejar las lineas con codigo
-	ya no es necesario proecuparse si hay erroes en esta funcion ya que la funcion que se menciono
-	es la encargada de encontrar errores, sin embargo solo encuentra errores de sintaxis y parser.
-
+Esta funcion se encarga de convertir los datos de la funcion *Analyze()* a un arbol de sintaxis para manejar las lineas con codigo
+ya no es necesario proecuparse si hay erroes en esta funcion ya que la funcion que se menciono
+es la encargada de encontrar errores, sin embargo solo encuentra errores de sintaxis y parser.
 */
-
 func (p *Parser) Parse() {
 	/*
 		`p.Data` es la variable que almacea las lineas de un archivo, cada linea es un string y lo que hago
@@ -384,7 +338,7 @@ func (p *Parser) AddStatement(value string, line int, statement BlockStatement) 
 
 func (p *Parser) ShowTraceback() {
 	for _, err := range p.Errors {
-		p.Error(color.Sprintf(err.Value), err.Line)
+		p.Error("\n"+color.Sprintf(err.Value), err.Line)
 	}
 }
 
@@ -401,7 +355,7 @@ func (p *Parser) AddError(err string, line int) {
 Envar un error formateado a la consola
 */
 func Error(name string, line int, message string) {
-	color.Printf("\n&4%s &r%d: %s\n", name, line, message)
+	color.Printf("&4%s &r%d: %s\n", name, line, message)
 }
 
 // Get file name of path

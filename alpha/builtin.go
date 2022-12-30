@@ -2,6 +2,7 @@ package alpha
 
 import (
 	"alpha/alpha/io"
+	"alpha/alpha/std/color"
 	"fmt"
 	"os"
 	"strconv"
@@ -30,7 +31,7 @@ var BuiltinExpressions = []Expression{
 	*NewExpression(`readline stored in %variable%`, readLine, true, true),
 	*NewExpression(`delete %string%`, deleteFileOrFolder, true, false),
 	*NewExpression(`replace %string% to %string% stored in %variable%`, replaceTo, true, false),
-	*NewExpression(`writeln %string% in %string% at %integer%`, writeFile, true, false),
+	//*NewExpression(`writeln %string% in %string% at %integer%`, writeFile, true, false),
 	*NewExpression(`clear terminal`, clearTerminal, true, false),
 }
 
@@ -60,7 +61,7 @@ func prompt(code *Code, instance *Instance) {
 	arg, _ := code.GetContentAt(0)
 	_varInstanced := code.GetVariableInstances()[0]
 
-	fmt.Printf("%s ", arg)
+	color.Printf("%s ", arg)
 	return_value := io.ReadLine()
 	instance.SetVariable(_varInstanced.Name, return_value)
 }
@@ -154,6 +155,7 @@ func writeFile(code *Code, instance *Instance) {
 		} else if strings.HasPrefix(code.Value, "write") {
 			io.Write(fpath, fcontent)
 		}
+
 		if strings.HasSuffix(code.Expr.Value, "at %integer%") {
 			idxContent, _ := code.GetContentAt(2) // 0 1 2
 			indexFile, _ := strconv.Atoi(idxContent)

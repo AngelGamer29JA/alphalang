@@ -73,6 +73,18 @@ func Println(value ...any) {
 	}
 }
 
+func PrintErr(input string, a ...any) {
+	Printf("&4error&r: "+input+"\n", a...)
+}
+
+// Similar to panic() but check if err is nil
+func Expect(err error) {
+	if err != nil {
+		PrintErr(err.Error())
+		os.Exit(-1)
+	}
+}
+
 func Sprintf(input string, a ...any) string {
 	// Add reset at end of the line
 	input = input + "&r"
@@ -119,19 +131,3 @@ func Sprint(input ...any) string {
 func Errorf(input string, a ...any) error {
 	return errors.New(Sprintf(input, a...))
 }
-
-// func PrintColors(input string) {
-// 	// Create a new Colorable instance
-// 	colorable := colorable.NewColorableStdout()
-
-// 	// Add reset at end of the line
-// 	input = input + "&r"
-
-// 	// Replace Minecraft color codes with corresponding ANSI codes
-// 	for mc, ansi := range ansiColors {
-// 		input = strings.ReplaceAll(input, mc, ansi)
-// 	}
-
-// 	// Return formatted string using the Colorable instance
-// 	colorable.Write([]byte(input))
-// }

@@ -1,0 +1,9 @@
+# loop %integer% times
+loop 5 times do
+    sendln "Hello world"
+end
+
+# Bucle loop
+loop do
+    sendln "Hello world"
+end

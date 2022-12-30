@@ -1,0 +1,2 @@
+name = "Manuel"
+sendln "Hello {name}"

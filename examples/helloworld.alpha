@@ -1,5 +1,7 @@
 sendln "Hello world"
 
-loop 5 times do
+loop do
     sendln "Hello world"
 end
+
+sendln "" | sendln ""

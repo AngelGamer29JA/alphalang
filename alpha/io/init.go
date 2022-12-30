@@ -17,42 +17,29 @@ Writes a line or modifies a line at a specific position in the file.
 */
 func WriteLineAt(path, content string, lineIdx int) {
 	file, err := os.OpenFile(path, os.O_RDWR, 0644)
-	if err != nil {
-		color.Println("&4error: ", err)
-		file.Close()
-		return
-	}
-	fileLines, err := ReadFileLines(path)
-	if err != nil {
-		color.Println("&4error&r: ", err)
-		file.Close()
-		return
-	}
+	color.Expect(err)
+	defer file.Close()
 
-	if lineIdx >= len(fileLines) {
-		color.Printf("&4error&r: file '%s', index out range %d", path, lineIdx)
-		file.Close()
-		return
-	}
-
-	if lineIdx != 0 {
-		lineIdx = lineIdx - 1
-	}
-
-	fileLines[lineIdx] = content
-
-	file.Truncate(0)
-	file.Seek(0, 0)
-
-	if _, err := file.WriteString(strings.Join(fileLines, "\n")); err != nil {
-		color.Println("&4error&r: ", err)
-		file.Close()
-		return
-	}
+	file.WriteAt([]byte(content), int64(lineIdx))
 }
 
 func WriteLine(path, content string) {
-	Write(path, fmt.Sprintln(content))
+	file, err := os.OpenFile(path, os.O_RDWR, 0644)
+	if err != nil {
+		if os.IsNotExist(err) {
+			color.Expect(color.Errorf("file not exists, %s", path))
+		}
+		color.Expect(err)
+	}
+	defer file.Close()
+
+	_, err = file.Seek(0, 2)
+	color.Expect(err)
+
+	fmt.Fprintf(file, "%s\n", content)
+
+	err = file.Sync()
+	color.Expect(err)
 }
 
 func Write(path, content string) {
@@ -101,6 +88,9 @@ func ReadFileLines(path string) ([]string, error) {
 	file, err := os.Open(path)
 	var lines []string
 	if err != nil {
+		if err == os.ErrExist {
+			return []string{}, color.Errorf("&4error&r: error to read file lines, file not found %s", path)
+		}
 		return []string{}, err
 	}
 	scanner := bufio.NewScanner(file)
