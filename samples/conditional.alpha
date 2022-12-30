@@ -1,0 +1,3 @@
+message = "Donde estas %s"
+replace "%s" to "Manuel" stored in {message}
+sendln {message}

@@ -1,0 +1,8 @@
+# addon StringLib
+# version 1.0
+
+instruction do
+    match "replace %string% to %string% in %variable%" # args contents
+    trigger
+
+end

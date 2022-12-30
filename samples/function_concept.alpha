@@ -1,0 +1,6 @@
+fn name, age, job : Persona
+    sendln {name}
+    return "{name} trabaja en {job} y tiene {age} años"
+end
+
+name = Persona("Manuel", 10, "ninguno")

@@ -1,0 +1,8 @@
+loop 5 times do
+    loop 5 times do
+        send "X"
+    end
+    send " "
+end
+
+sendln {io::args:}

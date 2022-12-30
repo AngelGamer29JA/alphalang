@@ -1,0 +1,10 @@
+ame = 2.3
+a = {ame
+
+arr = 1, 5, 0, "Hola"
+set {arr} to {arr::*}
+
+loop {arr::*} times do
+    sendln "{arr::[%loop-value%]}"
+end
+sendln {}

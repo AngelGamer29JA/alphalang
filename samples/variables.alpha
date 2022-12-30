@@ -1,0 +1,14 @@
+name = "Manu"
+manu = 0
+language = undefined
+
+sendln {manu}
+
+manu = 5
+
+sendln {manu}
+
+prompt "What's your name?" stored in {name}
+sendln "Welcome back!, {name}"
+prompt "Select language (es or en)>" stored in {language}
+sendln "Your language is {language}"

@@ -1,0 +1,8 @@
+# writeln "aloh" in "data.txt" at 1
+
+current = null
+
+loop do
+    prompt ">" stored in {current}
+    sendln "Input: {current}"
+end

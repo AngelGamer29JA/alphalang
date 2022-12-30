@@ -1,0 +1,4 @@
+sendln "hola\nhola"
+sendln "hola\thola"
+send "hla\n"
+send "mantra"

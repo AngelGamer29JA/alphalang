@@ -1,0 +1,29 @@
+pepe = 5
+
+sendln {name}
+prompt "Como te llamas?" stored in {name}
+sendln "Hola, &3{name}"
+
+set 5 to {name}
+sendln "SI {name}"
+sendln "Hola"
+
+name = {manuel}
+
+# if file {manuel} exists
+
+# end
+
+# if | 5 greater than 10
+# if | {name} is undefined
+# if
+# if | {name} is "string"
+
+count = 0
+
+loop 5 times do
+    add .5 to {count}
+    sendln "Hola {count}"
+end
+
+sendln {count}

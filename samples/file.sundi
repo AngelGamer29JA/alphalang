@@ -1,0 +1,14 @@
+line = ""
+repeat do
+    send "> "
+    readline stored in {line}
+end
+# if
+    # value is value ==
+    # value greater than value >
+    # value less than value <
+    # value is not value !=
+    # value is greater than or equal to value >=
+    # value is less than or equal to value <=
+    # value is file
+    # file value exists
